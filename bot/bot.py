@@ -5,7 +5,9 @@ import httpx
 from dotenv import load_dotenv
 
 # Load environment variables
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env.docker.secret'))
+_base = os.path.join(os.path.dirname(__file__), '..')
+load_dotenv(dotenv_path=os.path.join(_base, '.env.docker.secret'))
+load_dotenv(dotenv_path=os.path.join(_base, '.env.bot.secret'))
 load_dotenv()
 
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN") or os.getenv("BOT_TOKEN")
