@@ -1,6 +1,10 @@
 import httpx
 import os
 from typing import Dict, Any, List, Tuple
+from dotenv import load_dotenv
+
+path = os.path.join(os.path.dirname(__file__), "..", ".env.bot.secret")
+load_dotenv(dotenv_path=path)
 
 class BackendClient:
     def __init__(self):
