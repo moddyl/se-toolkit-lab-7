@@ -206,7 +206,7 @@ def run_test(command: str):
 
 # ── Telegram mode ─────────────────────────────────────────────────────────────
 
-async def run_telegram():
+def run_telegram():
     try:
         from telegram import Update
         from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
@@ -231,7 +231,7 @@ async def run_telegram():
     app.add_handler(MessageHandler(filters.COMMAND, telegram_handler))
 
     print(f"{BOT_NAME} is running...")
-    await app.run_polling()
+    app.run_polling()
 
 
 # ── Entry point ───────────────────────────────────────────────────────────────
@@ -242,4 +242,4 @@ if __name__ == "__main__":
     elif len(sys.argv) >= 2 and sys.argv[1] == "--test":
         print("Usage: uv run bot.py --test \"/command\"")
     else:
-        asyncio.run(run_telegram())
+        run_telegram()
