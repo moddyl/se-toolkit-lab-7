@@ -66,10 +66,10 @@ def handle_scores(args: str) -> str:
         lines = [f"Pass rates for {lab}:"]
         for entry in data:
             task = entry.get("task") or entry.get("name") or entry.get("id") or "Unknown"
-            rate = entry.get("pass_rate") or entry.get("rate") or entry.get("score")
+            rate = entry.get("avg_score")
             attempts = entry.get("attempts") or entry.get("total") or ""
             if rate is not None:
-                pct = f"{float(rate)*100:.1f}%" if float(rate) <= 1 else f"{float(rate):.1f}%"
+                pct = f"{float(rate):.1f}%"
                 line = f"- {task}: {pct}"
                 if attempts:
                     line += f" ({attempts} attempts)"
