@@ -91,3 +91,46 @@ By the end of this lab, you should be able to say:
 2. [Backend Integration](./lab/tasks/required/task-2.md) — P0: slash commands + real data
 3. [Intent-Based Natural Language Routing](./lab/tasks/required/task-3.md) — P1: LLM tool use
 4. [Containerize and Document](./lab/tasks/required/task-4.md) — P3: containerize + deploy
+
+## Deploy
+
+### Required environment variables
+
+Create `.env.docker.secret` in the project root with:
+
+```
+BOT_TOKEN=your-telegram-bot-token
+LMS_API_URL=http://backend:8000
+LMS_API_KEY=your-lms-api-key
+LLM_API_KEY=your-llm-api-key
+LLM_API_BASE_URL=http://host.docker.internal:42005
+LLM_API_MODEL=your-model-name
+POSTGRES_USER=...
+POSTGRES_PASSWORD=...
+POSTGRES_DB=...
+```
+
+### Start all services
+
+```bash
+docker compose --env-file .env.docker.secret up --build -d
+```
+
+### Verify
+
+```bash
+# Check all services running
+docker compose --env-file .env.docker.secret ps
+
+# Check bot logs
+docker compose --env-file .env.docker.secret logs bot --tail 20
+
+# Check backend healthy
+curl -sf http://localhost:42002/docs
+```
+
+### Stop
+
+```bash
+docker compose --env-file .env.docker.secret down
+```
